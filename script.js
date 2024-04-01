@@ -1,6 +1,6 @@
 // generate random color
 
-const randomColor = function(){
+const randomColor = function(){ 
     const hex = "0123456789ABCDEF"
     let color = "#"
     for (let i = 0; i < 6; i++) {
@@ -8,13 +8,24 @@ const randomColor = function(){
     }
     return color;
 }
+
+ function changeBgColor(){
+    document.body.style.backgroundColor = randomColor();
+ }
+
+ let intervalId;
 const startChaningColor = function(){
-    setInterval(()=>{
-        document.body.style.backgroundColor = randomColor();
-    },1000)
+    if(!intervalId){
+        intervalId =  setInterval(changeBgColor,1000);
+    }
 };
 
-const stopChangingColor = function(){};
+const stopChangingColor = function(){
+    clearInterval(intervalId);
+    console.log("stopped");
+    intervalId = null;
+    
+};
 
 document.querySelector("#start").addEventListener("click",startChaningColor);
 
